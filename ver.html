@@ -7,14 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AndyCraft 验证码</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/css/mdui.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <button class="g-recaptcha mdui-btn mdui-btn-block mdui-btn-raised mdui-ripple" data-sitekey="reCAPTCHA_site_key"
-        data-callback='onSubmit' data-action='submit'>一键验证~</button>
     <script src="https://www.recaptcha.net/recaptcha/api.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.2/js/mdui.min.js"></script>
+    <script>
+        function onSubmit(token) {
+            $.post("https://andyauth.ft2.club/auth.php", {
+                token: token
+            }, (data) => {
+                if (data == "wrong") {
+                    mdui.alert("token校验失败");
+                } else {
+                    mdui.alert("验证成功！请在5分钟内使用验证码" + data + "加群！");
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <button class="g-recaptcha mdui-btn mdui-btn-block mdui-btn-raised mdui-ripple"
+        data-sitekey="6LcQTJIbAAAAAIWN7noSA7lSpCe53IYyy125O-DQ" data-callback='onSubmit'
+        data-action='submit'>一键验证~</button>
+
 </body>
 
 </html>
